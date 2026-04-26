@@ -6,7 +6,7 @@
   <title>Birthday Surprise ❤️</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
     *{
       margin:0;
@@ -17,7 +17,7 @@
 
     body{
       min-height:100vh;
-      overflow:hidden;
+      overflow-x:hidden;
       color:#fff;
       background:
         radial-gradient(circle at top, rgba(255,77,109,0.25), transparent 40%),
@@ -75,6 +75,49 @@
       box-shadow:0 20px 70px rgba(0,0,0,0.8);
     }
 
+.slideshow{
+  margin-top:20px;
+  display:flex;
+  flex-direction:row;      /* 👉 LEFT to RIGHT */
+  overflow-x:auto;         /* horizontal scroll ON */
+  gap:15px;
+  padding:10px;
+  scroll-snap-type:x mandatory;
+  scroll-behavior:smooth;
+}
+
+/* Image size FIX */
+.slideshow img{
+  flex:0 0 auto;
+  width:280px;             /* card width fixed */
+  height:380px;            /* 👉 length increase */
+  object-fit:cover;        /* no distortion */
+  border-radius:16px;
+  scroll-snap-align:center;
+  box-shadow:0 10px 25px rgba(0,0,0,0.5);
+}
+
+/* Hide scrollbar */
+.slideshow::-webkit-scrollbar{
+  display:none;
+}
+.scroll-hint{
+  margin-top:10px;
+  font-size:0.95rem;
+  opacity:0.8;
+  animation:bounce 1.5s infinite;
+  color:#ffb3c7;
+}
+@media (max-width: 600px){
+  .slideshow img{
+    aspect-ratio: 3/4;   /* slightly taller for small screens */
+  }
+}
+/* animation */
+@keyframes bounce{
+  0%,100%{transform:translateX(0);}
+  50%{transform:translateX(10px);}
+}
     h1,h2,h3{
       color:#ffb3c7;
       margin-bottom:15px;
@@ -124,7 +167,189 @@
       border-radius:12px;
       background:rgba(0,0,0,0.25);
     }
+ /* STEP 4 button ko neeche nahi, upar normal position par lao */
 
+#s4 .card{
+  max-height: 90vh;
+  overflow-y: auto;
+  padding-bottom: 30px; /* kam space */
+}
+
+/* sticky hata do */
+#s4 button{
+  position: relative;   /* sticky remove */
+  bottom: auto;
+  margin-top: 20px;
+  z-index: auto;
+}
+.love-slideshow{
+  display:flex;
+  overflow-x:auto;
+  gap:15px;
+  padding:10px;
+  scroll-snap-type:x mandatory;
+}
+
+.love-slideshow::-webkit-scrollbar{
+  display:none;
+}
+
+.flip-card{
+  flex:0 0 auto;
+  width:240px;
+  height:300px;
+  perspective:1000px;
+  cursor:pointer;
+  scroll-snap-align:center;
+}
+
+.flip-inner{
+  width:100%;
+  height:100%;
+  position:relative;
+  transform-style:preserve-3d;
+  transition:transform 0.7s;
+}
+
+.flip-card.flipped .flip-inner{
+  transform:rotateY(180deg);
+}
+
+/* FRONT */
+.front, .back{
+  position:absolute;
+  width:100%;
+  height:100%;
+  border-radius:18px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  padding:15px;
+  backface-visibility:hidden;
+  box-shadow:0 10px 25px rgba(0,0,0,0.5);
+}
+
+/* FRONT STYLE */
+.front{
+  background:linear-gradient(135deg,#ff2d75,#ff6aa2);
+  color:white;
+}
+
+.front i{
+  font-size:2.5rem;
+  margin-bottom:10px;
+}
+
+/* BACK STYLE */
+.back{
+  background:rgba(255,255,255,0.08);
+  color:#fff;
+  transform:rotateY(180deg);
+  text-align:center;
+  font-size:0.95rem;
+  line-height:1.5;
+  backdrop-filter: blur(10px);
+}
+.img-box{
+  flex:0 0 auto;
+  width:280px;
+  text-align:center;
+}
+
+.img-box img{
+  width:280px;
+  height:380px;
+  object-fit:cover;
+  border-radius:16px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.5);
+}
+
+.caption{
+  margin-top:8px;
+  font-size:0.9rem;
+  color:#ffb3c7;
+  opacity:0.9;
+  line-height:1.4;
+}
+.promise-list{
+  text-align:left;
+  width:100%;
+  max-width:500px;
+  margin:20px auto 0;
+  padding-left:25px;
+}
+
+.promise-list li{
+  margin-bottom:12px;
+  line-height:1.7;
+  font-size:1.05rem;
+  color:#f5f5f5;
+}
+.heart-bg{
+  width:100%;
+  height:100vh;
+  position:relative;
+  overflow:hidden;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.center-msg{
+  z-index:10;
+  max-width:500px;
+}
+
+/* container full screen */
+/* STEP 7 floating hearts ko line mein aane se rokne ke liye */
+
+.heart-container{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+}
+
+/* har heart random jagah se start hoga */
+.heart{
+  position: absolute;
+  opacity: 0;
+  animation: floatUp linear infinite;
+  will-change: transform;
+}
+
+
+.heart img{
+  width:100%;
+  height:100%;
+  border-radius:50%;
+  object-fit:cover;
+  border:2px solid #ff4d7d;
+  box-shadow:0 0 15px rgba(255,77,125,0.6);
+}
+
+@keyframes floatUp {
+  0%{
+    transform: translateY(120vh) translateX(0px) scale(0.8);
+    opacity: 0;
+  }
+
+  15%{
+    opacity: 1;
+  }
+
+  50%{
+    transform: translateY(50vh) translateX(calc(-30px + 60px * var(--random))) scale(1);
+  }
+
+  100%{
+    transform: translateY(-150px) translateX(calc(-60px + 120px * var(--random))) scale(1.2);
+    opacity: 0;
+  }
+}
   </style>
 </head>
 <body>
@@ -186,50 +411,222 @@ Main chahta hoon ke apka ye sal sab sy best ho khushiyon se bhara, achievements 
 <div class="screen" id="s4">
   <div class="card">
     <h2>Our Cute Memories 📸💖</h2>
-     <p style="margin-top:15px;">
-      Kuch Meri Favourite pic jo mujhy bht sakoon deti hai ❤️
+
+    <p style="margin-top:15px;">
+      Apki har ak tasveer mere dil ko sukoon deti hai ❤️
     </p>
+
+    <p class="scroll-hint">Scroll Right to see memories ✨</p>
+
     <div class="slideshow">
-      <img src="images/photo1.jpg">
-      <img src="images/photo2.jpg">
-      <img src="images/photo3.jpg">
+
+      <div class="img-box">
+        <img src="images/photo1.jpg">
+        <p class="caption">Apki smile dekh kar mera dil boht khush hota hai ❤️</p>
+      </div>
+
+      <div class="img-box">
+        <img src="images/photo2.jpg">
+        <p class="caption">Jab ap mery sath hoti hain to sab kuch perfect lagta hai ✨</p>
+      </div>
+
+      <div class="img-box">
+        <img src="images/photo3.jpg">
+        <p class="caption">Ap mujhy hr din or ziyada apsy mohabbat karwati hain 💕</p>
+      </div>
+
+      <div class="img-box">
+        <img src="images/photo4.jpg">
+        <p class="caption">Ap meri zindagi ka sab sy khubsurat hisa hain 🌹</p>
+      </div>
+
+      <div class="img-box">
+        <img src="images/photo5.jpg">
+        <p class="caption">Apki presence mery dil ko bht sakoon deti karti hai ✨</p>
+      </div>
+
+      <div class="img-box">
+        <img src="images/photo6.jpg">
+        <p class="caption">Apky bina sab kuch khali khali lagta hai 💔</p>
+      </div>
+
+      <div class="img-box">
+        <img src="images/photo7.jpg">
+        <p class="caption">Ap meri har dua ka sab sy piyara jawab hain 🤍</p>
+      </div>
+
+      <div class="img-box">
+        <img src="images/photo8.jpg">
+        <p class="caption">Apki eyes main meri puri duniya basti hai 👀❤️</p>
+      </div>
+
+      <div class="img-box">
+        <img src="images/photo9.jpg">
+        <p class="caption">Ap meri zindagi ki wo kahani hain jo kabhi khatam nahi hogi inshaAllah✨</p>
+      </div>
+
+      <div class="img-box">
+        <img src="images/photo10.jpg">
+        <p class="caption">Apka naam mere dil ki dharkan ban chuka hai janam 💖</p>
+      </div>
+
+      <div class="img-box">
+        <img src="images/photo11.jpg">
+        <p class="caption">Jab ap muskurati hain to duniya ruk si jati hai 🌸</p>
+      </div>
+
+      <div class="img-box">
+        <img src="images/photo12.jpg">
+        <p class="caption">Ap mery liye bilkul perfect wifu material ho ❤️</p>
+      </div>
+
+      <div class="img-box">
+        <img src="images/photo13.jpg">
+        <p class="caption">Apki yadein mere dil ko hamesha apka bana kar rakhti hai 🔥</p>
+      </div>
+
+      <div class="img-box">
+        <img src="images/photo14.jpg">
+        <p class="caption">Apky sath guzra har pal bht ziyada priceless hai 💎</p>
+      </div>
+
+      <div class="img-box">
+        <img src="images/photo15.jpg">
+        <p class="caption">Ap meri zindagi ki sab sy ziyada khubsurat blessing hain 🌙</p>
+      </div>
+
+      <div class="img-box">
+        <img src="images/photo16.jpg">
+        <p class="caption">Ap meri har khushi ka reason hain 💕</p>
+      </div>
+
+      <div class="img-box">
+        <img src="images/photo17.jpg">
+        <p class="caption">Ap meri duniya ka center hain mera garoor ho 🌍❤️</p>
+      </div>
+
+      <div class="img-box">
+        <img src="images/photo18.jpg">
+        <p class="caption">Ap sy shuro aur ap par hi khatam hai meri duniya meri jan ki toti ✨</p>
+      </div>
+
     </div>
 
-    <button onclick="go(5)">Ab meri jan ko nazar na laga dena MashAlllah parho or ajay chalo 💖</button>
+    <button onclick="go(5)">
+      Ab Allah sy dua hai kay apko nazar na lagy, MashAllah parh kar agy chaliye 💖
+    </button>
   </div>
 </div>
 
 <!-- STEP 5 -->
 <div class="screen" id="s5">
   <div class="card">
-    <h2>Why I Love You 💕</h2>
-    <p>Your smile feels like home.<br>Your voice feels like peace.<br>Your presence feels like everything I need.</p>
-    <button onclick="go(6)">Next</button>
+    <h2>What I Like most in You 💕</h2>
+    <p style="margin-bottom:10px;">Click cards to reveal ✨</p>
+
+    <div class="love-slideshow">
+
+      <div class="flip-card" onclick="flip(this)">
+        <div class="flip-inner">
+          <div class="front">
+            <i class="fa-solid fa-face-smile"></i>
+            <h3>Smile</h3>
+          </div>
+          <div class="back">
+            Apki smile meri zindagi ki sab say khubsurat scenery hai jab dekhta dil karta or moahabat karo apsay  ❤️
+          </div>
+        </div>
+      </div>
+
+      <div class="flip-card" onclick="flip(this)">
+        <div class="flip-inner">
+          <div class="front">
+            <i class="fa-solid fa-microphone-lines"></i>
+            <h3>Voice</h3>
+          </div>
+          <div class="back">
+            apki awaz uff ye bolo ga is duniya mai mery sakoon ki ikloti wajh hai jab ap ki awaz hum anpna name sunty to mar jany ko dil karta asa lagta sab mil jiya 💕
+          </div>
+        </div>
+      </div>
+
+      <div class="flip-card" onclick="flip(this)">
+        <div class="flip-inner">
+          <div class="front">
+            <i class="fa-solid fa-eye"></i>
+            <h3>Eyes</h3>
+          </div>
+          <div class="back">
+          apki eyes meri favorite kahani hai jab dekhta dil karta doob jao un mai <br> "Some eyes touch you more than hands ever could" ✨
+          </div>
+        </div>
+      </div>
+
+      <div class="flip-card" onclick="flip(this)">
+        <div class="flip-inner">
+          <div class="front">
+            <i class="fa-solid fa-kiss-wink-heart"></i>
+            <h3>Lips</h3>
+          </div>
+          <div class="back">
+          ap kay lips bht cute lagty jab ap mera name leti un say uff Dil karta unko chumta raho or batao kitna piyar karta ap say 💖
+          </div>
+        </div>
+      </div>
+
+      <div class="flip-card" onclick="flip(this)">
+        <div class="flip-inner">
+          <div class="front">
+            <i class="fa-solid fa-crown"></i>
+            <h3>Hairs</h3>
+          </div>
+          <div class="back">
+            Bs itna araz karo ga <br>"پوچھا جو ان سے چاند نکلتا ہے کس طرح <br>زلفوں کو رخ پہ ڈال کے جھٹکا دیا کہ یوں" 🌹
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <button onclick="go(6)">Tareef to apka banda har chez kar sakta phir mood karab ho ga ajar baki body dtail suni ho to call karna raat ko abhi ajay chalo jana 💍</button>
   </div>
 </div>
 
 <!-- STEP 6 -->
 <div class="screen" id="s6">
   <div class="card">
-    <h2>My Promises 💍</h2>
-    <p>Mai hamesha apkay sath raho ga.
-    <br>I always choose you sorry I mean you always my first Priority.
-    <br>promise mai pori khosish karo ga ap ko kabhi na rolao.
-    <br>I promise mai is sal pakka 2 bar milnay aoo ga.
-    <br>Mai kabhi ap ko akela nahi choro ga.
-    <br>Promise hamesha apko khush rakho ga.
-    <br>Promise ap ki bat mano ga romantic or jesa ap bolo gi wasa ban kar rahao ga.
-    <p>
+    <h2>My Promises jo as a gift dena chata 💍</h2>
+
+    <ol class="promise-list">
+      <li>Mai hamesha ap kay sath raho ga.</li>
+      <li>I always choose you, sorry I mean ap meri first priority ho.</li>
+      <li>Promise mai pori koshish karo ga ap ko kabhi na rulane ki.</li>
+      <li>I promise mai is saal pakka 2 bar milnay aao ga.</li>
+      <li>Mai kabhi ap ko akela nahi choro ga.</li>
+      <li>Promise hamesha ap ko khush rakho ga.</li>
+      <li>Promise ap ki har baat mano ga, romantic or jesa ap bolo gi wesa rahoon ga.</li>
+    </ol>
+
     <button onclick="go(7)">Final</button>
   </div>
 </div>
 
 <!-- STEP 7 -->
 <div class="screen" id="s7">
-  <div class="card">
-    <h2>Final Message 🎂</h2>
-    <p>Thank you for existing in my life ❤️</p>
-    <h3>Happy Birthday 💖</h3>
+  <div class="heart-bg">
+
+    <!-- floating hearts layer -->
+    <div class="heart-container" id="heartContainer"></div>
+
+    <!-- center message -->
+    <div class="center-msg card">
+      <h2>Final Message 🎂❤️</h2>
+      <p>
+        Thank you for everything and existing in my life ❤️<br><br>
+        <strong>Once Again Happy Birthday Meri Jan Ki Toti 💖</strong>
+      </p>
+    </div>
+
   </div>
 </div>
 
@@ -245,6 +642,42 @@ function go(n){
 
   if(n===3){
     animateCounter();
+  }
+
+  // 👉 HERE IS THE FIX (STEP 7 trigger)
+  if(n === 7){
+    createHearts();
+  }
+}
+function createHearts(){
+  const container = document.getElementById("heartContainer");
+
+  const images = [
+    "images/photo1.jpg","images/photo2.jpg","images/photo3.jpg",
+    "images/photo4.jpg","images/photo5.jpg","images/photo6.jpg",
+    "images/photo7.jpg","images/photo8.jpg","images/photo9.jpg",
+    "images/photo10.jpg","images/photo11.jpg","images/photo12.jpg",
+    "images/photo13.jpg","images/photo14.jpg","images/photo15.jpg",
+    "images/photo16.jpg","images/photo17.jpg","images/photo18.jpg"
+  ];
+
+  for(let i=0;i<60;i++){
+    let heart = document.createElement("div");
+    heart.classList.add("heart");
+
+    let img = document.createElement("img");
+    img.src = images[Math.floor(Math.random()*images.length)];
+
+    heart.appendChild(img);
+
+    // RANDOM POSITION + SPEED
+    heart.style.left = Math.random()*100 + "vw";
+    heart.style.animationDuration = (4 + Math.random()*6) + "s";
+    heart.style.animationDelay = Math.random()*5 + "s";
+    heart.style.width = (40 + Math.random()*40) + "px";
+    heart.style.height = heart.style.width;
+    heart.style.setProperty("--random", Math.random());
+    container.appendChild(heart);
   }
 }
 
@@ -267,6 +700,9 @@ function animateCounter(){
     el.innerText=Math.floor(start);
   },stepTime);
 }
+function flip(card){
+  card.classList.toggle("flipped");
+}
 
 function openMail(){
   document.getElementById('step2mail').classList.add('hidden');
@@ -276,4 +712,3 @@ function openMail(){
 
 </body>
 </html>
-
